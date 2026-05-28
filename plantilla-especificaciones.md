@@ -43,40 +43,13 @@
 
 #### 7. ARQUITECTURA DE LA INFORMACIÓN Y UX
 
-#### 8. ESPECIFICACIONES TÉCNICAS
-
-- **Frontend:** 
-- **Backend:** 
-- **Base de Datos:**
-
-
-
-
-#### 5. ESPECIFICACIONES FUNCIONALES
-
-| **Módulo**     | **Descripción**                                                              | **Criterio de Aceptación**                                                      |
-| -------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Autenticación  | El usuario podrá registrarse usando email y contraseña.                      | El sistema debe enviar un correo de verificación exitoso.                       |
-| Búsqueda       | El usuario podrá buscar libros por título, autor o ISBN.                     | La búsqueda debe mostrar resultados predictivos al escribir 3 caracteres.       |
-| Registro (Log) | El usuario podrá calificar un libro del 1 al 5.                              | La calificación debe guardarse en el perfil y actualizar el promedio del libro. |
-
-
-#### 6. REQUISITOS NO FUNCIONALES
-
-| **Categoría**     | **Requisito**                                                      |
-| ----------------- | ------------------------------------------------------------------ |
-| **Rendimiento**   | Tiempo de carga inicial rápido (LCP).                              |
-| **Accesibilidad** | La web debe ser navegable mediante teclado y lectores de pantalla. |
-| **Seguridad**     | Las contraseñas deben estar encriptadas.            
-
-#### 7. ARQUITECTURA DE LA INFORMACIÓN Y UX
-
-- **Patrón de Navegación:** Barra de navegación superior fija (Sticky Navbar) con: Inicio, Explorar, Biblioteca, Mi Perfil.
+- **Patrón de Navegación:** Barra de navegación superior fija (Sticky Navbar) con: Inicio, Mi Perfil.
 - **Diseño Visual:** Se permitira.
 
 #### 8. ESPECIFICACIONES TÉCNICAS
 
-- **Frontend:** React.js para un renderizado rápido. Tailwind CSS para el sistema de diseño responsivo.
-- **Backend:** Springboot con Java para gestionar la lógica de negocio y las peticiones a APIs externas.
-- **Base de Datos:** MariaDB para relacionar usuarios, libros, reseñas y seguidores de manera estructurada.
-               |
+- **Frontend:** figma para el prototipado, y html y css para la estructura y diseño de la plataforma.
+- **Backend:** PHP para gestionar la lógica de estadisticas y validacion para credenciales.
+- **Base de Datos:** MariaDB para relacionar alumnado, calificaciones, grado de desercion y profesorado de manera estructurada.
+
+
