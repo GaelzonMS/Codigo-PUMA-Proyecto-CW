@@ -1,18 +1,20 @@
 #### 1. INFORMACIÓN INICIAL
 - **Autor:** Codigo PUMA
-- **Título del proyecto:** ETECHelp o CompuHelp
+- **Título del proyecto:** ETECHelp
 - **Fecha de inicio:** 27 de mayo de 2026
 
 #### 2. RESUMEN DEL PROYECTO, METAS Y OBJETIVOS
 - **Resumen:** 
-    ETECHelp es una página web que ayuda al estudiante y al profesor a llevar un seguimiento de su progreso en el estudio técnico en computación, mitigando la decersión, brindando areas de oportunidad tanto alumnos y profesores. 
+    ETECHelp es una página web que ayuda al estudiante y al profesor a llevar un seguimiento de su progreso en el estudio técnico en computación, mitigando la decersión, brindando areas de oportunidad y ayuda especializada tanto alumnos y profesores. 
 - **Metas:**
     - Tener un producto básico que represente bien la idea en 1 semana 
     - Que el producto despliegue una pagina de acuerdo a tu perfil (alumno, maestro o administrador)
     - Mostrar estadísticas de desempeño de cada alumno 
 - **Objetivos:**
+    - Tener una interfáz intuitiva tanto para el alumnado y el profesor
     - Tener una base de datos solida que almacene perfiles de alumnos
     - Crear gráficas de acuerdo a su calificación, actividades y cantidad de veces de apoyo
+    - Que la pagina se adapte al dispositivo 
 
 #### 3. PÚBLICO OBJETIVO (UX)
 - Alumnos y profesores de la ETE de computación de la ENP 6
@@ -23,11 +25,19 @@
     - Tener una sección de dudas y comentarios global
     - Realizar un cuestionario para averiguar el perfil de un estudiante 
     - Desplegar en que áreas un alumno esta deficiente
+    - Crear una lista para el profesor que muestre los alumnos que ocupan más ayuda
 - **Fuera de alcance:**
     - Despliegue de información por gráficas
     - Desplegar recursos personalizados de acuerdo al estudiante 
 
 #### 5. ESPECIFICACIONES FUNCIONALES
+| **Módulo**     | **Descripción**                                                              | **Criterio de Aceptación**                                                      |
+| -------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Autenticación  | El usuario podrá registrarse usando email y contraseña, numero de cuenta y grupo                      | El sistema debe enviar un correo de verificación exitoso.                       |
+| Consulta de alumnos (exclusivo de profes)      | El profesor podra ver que alumnos estan inscritos y cual es su situación académica (calificaciones, cuantas veces pidio ayuda, actividades realizadas)                    | Al mostrar el listado de alumnos, aparecen primero los alumnos con potencial de desertar       |
+| Consulta de tu perfil (ALUMNO) | El alumno podra observar por modulo cuantas actividades ha entregado o le faltan y sus calificaciones                               | Se muestran las actividades divididas por modulo, mostrando primero los modulos de mayor deficiencia  | 
+| Publicar | | | |
+
 
 #### 6. REQUISITOS NO FUNCIONALES
 
@@ -38,3 +48,35 @@
 - **Frontend:** 
 - **Backend:** 
 - **Base de Datos:**
+
+
+
+
+#### 5. ESPECIFICACIONES FUNCIONALES
+
+| **Módulo**     | **Descripción**                                                              | **Criterio de Aceptación**                                                      |
+| -------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Autenticación  | El usuario podrá registrarse usando email y contraseña.                      | El sistema debe enviar un correo de verificación exitoso.                       |
+| Búsqueda       | El usuario podrá buscar libros por título, autor o ISBN.                     | La búsqueda debe mostrar resultados predictivos al escribir 3 caracteres.       |
+| Registro (Log) | El usuario podrá calificar un libro del 1 al 5.                              | La calificación debe guardarse en el perfil y actualizar el promedio del libro. |
+
+
+#### 6. REQUISITOS NO FUNCIONALES
+
+| **Categoría**     | **Requisito**                                                      |
+| ----------------- | ------------------------------------------------------------------ |
+| **Rendimiento**   | Tiempo de carga inicial rápido (LCP).                              |
+| **Accesibilidad** | La web debe ser navegable mediante teclado y lectores de pantalla. |
+| **Seguridad**     | Las contraseñas deben estar encriptadas.            
+
+#### 7. ARQUITECTURA DE LA INFORMACIÓN Y UX
+
+- **Patrón de Navegación:** Barra de navegación superior fija (Sticky Navbar) con: Inicio, Explorar, Biblioteca, Mi Perfil.
+- **Diseño Visual:** Se permitira.
+
+#### 8. ESPECIFICACIONES TÉCNICAS
+
+- **Frontend:** React.js para un renderizado rápido. Tailwind CSS para el sistema de diseño responsivo.
+- **Backend:** Springboot con Java para gestionar la lógica de negocio y las peticiones a APIs externas.
+- **Base de Datos:** MariaDB para relacionar usuarios, libros, reseñas y seguidores de manera estructurada.
+               |
