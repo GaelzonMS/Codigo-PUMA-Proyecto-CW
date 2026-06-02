@@ -36,10 +36,20 @@
 | Autenticación  | El usuario podrá registrarse usando email y contraseña, numero de cuenta y grupo                      | El sistema debe enviar un correo de verificación exitoso.                       |
 | Consulta de alumnos (exclusivo de profes)      | El profesor podra ver que alumnos estan inscritos y cual es su situación académica (calificaciones, cuantas veces pidio ayuda, actividades realizadas)                    | Al mostrar el listado de alumnos, aparecen primero los alumnos con potencial de desertar       |
 | Consulta de tu perfil (ALUMNO) | El alumno podra observar por modulo cuantas actividades ha entregado o le faltan y sus calificaciones                               | Se muestran las actividades divididas por modulo, mostrando primero los modulos de mayor deficiencia  | 
-| Publicar | | | |
+| Publicar comentarios | El alumno pueda hacer preguntas acerca de los temas que no entienda y contabilice cuantas veces lo ha hecho| Que el profesor pueda leer el comentario | 
+| Registro de calificaciones | Que el profesor pueda modificar o darle una calificación a cada alumno, por actividad 
+| Registro de alumnos (PROFESOR) | El profesor puede registrar un nuevo alumno por medio de su numero de cuenta y correro electrónico | |
+| Consultar recursos personalizados | El alumno puede ingresar para ver que recursos puede consultar o ejercicios propuestos de acuerdo a su perfil | 
+| Cuestionario de revisión de perfil (ESTUDIANTE) | El alumno al ingresar por primera vez a la pagina, tendrá que realizar un cuestionario para averiguar el perfil que tiene | Aparecen secciones personalizadas en la pagina |
+| Registro de actividades, avisos y recursos (PROFESOR) | El profesor puede ya sea añadir nuevas actividades al modulo, dar avisos en una sección única y poner nuevos recursos a disposición | 
 
 
 #### 6. REQUISITOS NO FUNCIONALES
+| **Categoría**     | **Requisito**                                                      |
+| ----------------- | ------------------------------------------------------------------ |
+| **Rendimiento**   | Tiempo de carga inicial rápido (LCP).                              |
+| **Accesibilidad** | La web debe ser navegable mediante teclado y lectores de pantalla. |
+| **Responsivo**     | El sitio web tiene que adaptarse a cualquier dispositivo           
 
 #### 7. ARQUITECTURA DE LA INFORMACIÓN Y UX
 
