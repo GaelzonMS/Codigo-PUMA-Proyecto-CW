@@ -42,18 +42,21 @@ while($t < 10){
     for ($col = 0; $col < 3; $col ++){
         echo "|     ";
         if($col == 2){
-            if ($tablaTDV[$t][2]>250){
+            if ($tablaTDV[$t][2]>250)
+            {
                 echo "Exceso";
             }
-            else{
+            else
+            {
                 echo $tablaTDV[$t][2];
             }
-        } else {
-            echo $tablaTDV[$t][2];
+        } 
+        else 
+        {
+            echo $tablaTDV[$t][$col];
         }
     }
     echo "<br>";
     $t++;
 }
-
 ?>
