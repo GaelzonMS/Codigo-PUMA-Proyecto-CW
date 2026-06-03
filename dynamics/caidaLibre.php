@@ -49,7 +49,7 @@ while($t < 10){
                 echo $tablaTDV[$t][2];
             }
         } else {
-            echo $tablaTDV[$t][2];
+            echo $tablaTDV[$t][$col];
         }
     }
     echo "<br>";
