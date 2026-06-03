@@ -39,6 +39,8 @@ $t = 0;
         <head>
             <meta charset='UTF-8'>
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <meta name='autor' content='equipo9'>
+            <meta name='descripcion' content='ejercicio integrador de php con html y css'>
             <title>Caida libre</title>
         </head>
         <body>
