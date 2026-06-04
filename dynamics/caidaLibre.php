@@ -41,13 +41,12 @@ $t = 0;
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <meta name='autor' content='equipo9'>
             <meta name='descripcion' content='ejercicio integrador de php con html y css'>
-            <href type='stylesheet' src='estiloCaidaLibre.css'
-            <title>Caida libre</title>
+            <link rel='stylesheet' href='../statics/styles/caidaLibre.css'>
         </head>
-        <body style=background-image: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTRsc3h6MXE1cGd2aTJmM2w3bHRoM2ZjdG9maWpoaWVmMGEwa2tlOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ltIlTlrYfOp838CaYc/200w.webp')>
+        <body>
             <h1>Caida Libre </h1>
             <img src='https://i.pinimg.com/originals/7c/31/99/7c31995e81cfae6f5ed4316c4ba67a73.gif'>
-            <table border = '4' >
+            <table border = '4' id='tablaVelocidad' style='background-color:white'>
                 <thead>
                     <tr>
                         <th>Tiempo (seg)</th>
@@ -74,7 +73,7 @@ while($t < 10)
         {
             if ($tablaTDV[$t][2]>250)
             {
-                echo '<td>Exceso</td>';
+                echo '<td style="color:red">Exceso</td>';
             }
             else
             {
@@ -98,19 +97,6 @@ while($t < 10)
         </html>
             ';
     
-/*
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>   
-                
-        </body>
-        </html>
-        ";
-}
-*/
 ?>
 <style>
 
