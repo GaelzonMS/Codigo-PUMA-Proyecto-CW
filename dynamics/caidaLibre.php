@@ -41,10 +41,12 @@ $t = 0;
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <meta name='autor' content='equipo9'>
             <meta name='descripcion' content='ejercicio integrador de php con html y css'>
+            <href type='stylesheet' src='estiloCaidaLibre.css'
             <title>Caida libre</title>
         </head>
-        <body>
+        <body style=background-image: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTRsc3h6MXE1cGd2aTJmM2w3bHRoM2ZjdG9maWpoaWVmMGEwa2tlOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ltIlTlrYfOp838CaYc/200w.webp')>
             <h1>Caida Libre </h1>
+            <img src='https://i.pinimg.com/originals/7c/31/99/7c31995e81cfae6f5ed4316c4ba67a73.gif'>
             <table border = '4' >
                 <thead>
                     <tr>
@@ -90,7 +92,11 @@ while($t < 10)
 }
 
     echo '</tbody>
-            </table>';
+            </table>
+            
+        </body>
+        </html>
+            ';
     
 /*
 
@@ -106,3 +112,7 @@ while($t < 10)
 }
 */
 ?>
+<style>
+
+</style>
+
