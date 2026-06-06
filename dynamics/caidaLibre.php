@@ -33,30 +33,72 @@ function generaTabla(){
 }
 $col = 0;
 $t = 0;
-generaTabla();
-echo  "_________________________________________________________<br>";
-echo "|Tiempo (seg)     |Posición final     |Velocidad final (ft/s)|<br>";
-echo "_________________________________________________________<br>";
+    echo "
+        <!DOCTYPE html>
+        <html lang'es'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <meta name='autor' content='equipo9'>
+            <meta name='descripcion' content='ejercicio integrador de php con html y css'>
+            <link rel='stylesheet' href='../statics/styles/caidaLibre.css'>
+        </head>
+        <body>
+            <h1>Caida Libre </h1>
+            <img src='https://i.pinimg.com/originals/7c/31/99/7c31995e81cfae6f5ed4316c4ba67a73.gif'>
+            <table border = '4' id='tablaVelocidad' style='background-color:white'>
+                <thead>
+                    <tr>
+                        <th>Tiempo (seg)</th>
+                        <th>Posición final</th>
+                        <th>Velocidad final (ft/s)</th>
+                    </tr>
+                </thead>
+                <tbody>";
 
-while($t < 10){
-    for ($col = 0; $col < 3; $col ++){
-        echo "|     ";
-        if($col == 2){
+generaTabla();
+
+
+while($t < 10)
+{
+    $r=0;
+    if($r=0)
+    {
+            echo '<tr>';
+    }
+    for ($col = 0; $col < 3; $col ++)
+    {
+        
+        if($col == 2)
+        {
             if ($tablaTDV[$t][2]>250)
             {
-                echo "Exceso";
+                echo '<td style="color:red">Exceso</td>';
             }
             else
             {
-                echo $tablaTDV[$t][2];
+                echo '<td>'. $tablaTDV[$t][2] . '</td>';
             }
         } 
-        else 
-        {
-            echo $tablaTDV[$t][$col];
-        }
+        else
+            echo '<td>'. $tablaTDV[$t][$col]. '</td>';
+        /*--------Para indicar que es una nueva row--------*/
+        $r=1;
     }
-    echo "<br>";
+    if($r=1)
+        echo '<tr>';
     $t++;
 }
+
+    echo '</tbody>
+            </table>
+            
+        </body>
+        </html>
+            ';
+    
 ?>
+<style>
+
+</style>
+
