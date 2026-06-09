@@ -1,0 +1,164 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+:root {
+    --naranjaUnam: rgb(255, 174, 0);
+    --azulUnam: rgb(75, 75, 209);
+}
+
+body
+{
+    background-color: rgb(223, 229, 235);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+nav
+{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+main
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+/*--CLASES----------------------------------------------------------------------*/
+.titulo1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.textoNormal{
+    font-family: Arial, Helvetica;
+}
+.logo
+{
+    display: block;
+    height: 70px;
+    width: auto;
+}
+.inputLogin
+{
+    background-color: #ffffff2d;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px solid black;
+    transition: 0.5s;
+}
+.inputLogin:hover
+{
+    transform: scale(1.2) translateX(20px) translateY(-2px);
+    background-color: rgba(0, 0, 0, 0.575);
+    color: #ffffff;
+    filter:drop-shadow(10px 10px 10px black);
+}
+.botonTipo1
+{
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    background-color: var(--azulUnam);
+    color: #ffffff9d;
+    border: 3px solid var(--naranjaUnam);
+    border-radius: 10px;
+    filter:drop-shadow(0 0 5px var(--naranjaUnam));
+    transition: 0.7s;
+}
+.botonTipo1:hover
+{
+    padding: 10px;
+    background-color: var(--naranjaUnam);
+    color: var(--azulUnam);
+    border: 3px solid var(--azulUnam);
+    border-radius: 10px;
+    filter:drop-shadow(0 0 10px var(--azulUnam));
+}
+.textoBlancoConBrillo
+{
+    color: #ffffff;
+    filter: drop-shadow(0 0 5px white);
+}
+/*-----------------------LOGO UNAM-------------------------------*/
+#inicioDeSesionBody
+{
+    position: relative;
+    min-height: 100vh;
+    background-color: rgb(223, 229, 235);
+}
+#inicioDeSesionBody::before
+{
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url('https://www.tecomatlan.tecnm.mx/wp-content/uploads/elementor/thumbs/Screenshot_15-p8k7p4zar62yftwt3jny2wwypxepbrfs2nycmyqjvw.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7) saturate(0);
+}
+#navInicioSesion
+{
+    background-color: rgb(255, 178, 36);
+    height: 13vh;
+
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    color: #ffffff;
+}
+#logosContenedor
+{
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+#tituloPaginaInicioDeSesion
+{
+    flex: 1;
+    width: auto;
+    transform: none;
+    text-align: center;
+    margin: 0;
+}
+#sectionIniciarSesion
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    margin-top: 20px;
+}
+#contendorFormularioInicioSesion
+{
+    width: 50vw;
+    height: 28vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.212);
+    border-radius: 20px;
+}
+#formularioInicioSesion
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+/*------------------------------------------------------*/
