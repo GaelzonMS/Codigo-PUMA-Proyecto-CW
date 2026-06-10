@@ -1,0 +1,61 @@
+//Fondo
+#clasesBody {
+    position: relative;
+    min-height: 100vh;
+    background-color: rgb(223, 229, 235);
+    margin: 0;
+    padding: 0;
+}
+
+#clasesBody ::before{
+    content: none !important;
+    display: none !important;
+}
+
+#mainClases{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#seccionMisClases {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#Vacio{
+    background-color: rgb(255, 178, 36);
+    border-left: 5px solid rgb(75, 75, 209);
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 550px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+//titulo y texto
+#Vacio h3 {
+    color: rgb(75, 75, 209);
+    font-size: 24px;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+.textoNormal{
+    font-family: Arial, Helvetica;
+    color: rgb(75, 75, 209);
+    font-size: 18px;
+    font-weight: bold;
+}
+.Instrucciones{
+    font-family: Arial, Helvetica;
+    color: rgb(75, 75, 209);
+    font-size: 18px;
+    line-height: 1.5;
+}
