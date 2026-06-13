@@ -130,6 +130,10 @@ main
 .textoBlanco{
     color: white;
 }
+.textoNgero
+{
+    color: black;
+}
 .logo
 {
     display: block;
@@ -205,9 +209,17 @@ main
 }
 .previewMateria
 {
+    background-color: #ffffff93;
+
     width: 100%;
-    height: 120px;
+    height: auto;
     margin: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0 50px 0;
 }
 .footerGeneral
 {
@@ -224,8 +236,6 @@ main
 }
 .despliegeDeTema
 {
-    background-color: #ce4848;
-
     width: auto;
     height: fit-content;
     margin: 10px 15px;
@@ -278,6 +288,10 @@ main
 .textoChiquito
 {
     font-size: 0.7em;
+}
+.redondeo25px
+{
+    border-radius: 25px;
 }
 /*-----------------------LOGO UNAM-------------------------------*/
 
@@ -335,7 +349,6 @@ main
 }
 #materiasInscritas
 {
-    background-color: brown;
     width: 100%;
     height: auto;
 

@@ -53,7 +53,9 @@
         <section id="seccionMateriasInscritas" class="cajaRedondeadaConPadding">
             <h4 class="textoBlanco glow">Materias inscritas</h4>
             <div id="materiasInscritas">
-                <button class="previewMateria">materia</button>
+                <a href="materia.php" class="previewMateria bordeNegro redondeo25px textoNgero sinDelineado crezca">
+                    <p>materia</p>
+                </a>
             </div>
         </section>
     </main>
