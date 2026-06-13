@@ -1,0 +1,12 @@
+{
+  "Insert id attribute": {
+    "prefix": "id",
+    "body": "id=\"$1\"$0",
+    "description": "Insert id attribute"
+  },
+  "Insert class attribute": {
+    "prefix": "class",
+    "body": "class=\"$1\"$0",
+    "description": "Insert class attribute"
+  }
+}
