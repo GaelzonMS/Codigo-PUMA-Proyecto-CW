@@ -111,6 +111,13 @@ main
     border-radius: 100%;
     border: 4px solid rgba(0, 0, 0, 0.234);
 }
+.fotoPerfilGrande
+{
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    border: 4px solid rgba(0, 0, 0, 0.234);
+}
 .seccionDeAvisos
 {
     width: auto;
@@ -318,5 +325,18 @@ main
     flex-direction: column;
     gap: 20px;
     align-items: center;
+}
+#seccionPerfilInformacion
+{
+    background-color: #e4b9b9;
+
+    width: 100%;
+    height: auto;
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 /*------------------------------------------------------*/
