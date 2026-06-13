@@ -12,7 +12,7 @@
 
 body
 {
-    background-color: rgb(223, 229, 235);
+    background-color: var(--naranjaUnam);
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -26,6 +26,7 @@ nav
 
 main
 {
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
     border: 0;
@@ -136,6 +137,16 @@ main
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
+.despliegeDeTema
+{
+    background-color: #ce4848;
+
+    width: auto;
+    height: fit-content;
+    margin: 10px 15px;
+    padding: 10px;
+    border-radius: 25px;
 }
 /*-----------------------LOGO UNAM-------------------------------*/
 #inicioDeSesionBody
@@ -284,6 +295,18 @@ main
     display: flex;
     flex-direction: row;
     gap: 5px;
-
 }
+#seccionMateriales
+{
+    background-color: blueviolet;
+
+    width: 100%;
+    height: auto;
+    margin: 10px 0 10px 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 /*------------------------------------------------------*/
