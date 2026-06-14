@@ -22,9 +22,9 @@
                 </div>
                 <h1 id="tituloPaginaInicioDeSesion" class="titulo1 glow">ETECHELP</h1>
                 <section id="perfil" class="crezca">
-                    <button class="circulo">
+                    <a href="perfil.php" class="circulo">
                         <img src="../../statics/media/pfpDefault.jpg" id="fotoPerfil" class="fotoPerfilChiquita">
-                    </button>
+                    </a>
                 </section>
             </nav>';
     $footer = '
