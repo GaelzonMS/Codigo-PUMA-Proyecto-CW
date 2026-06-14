@@ -5,6 +5,9 @@
         echo $encabezado;
     ?>
     <main>
+        <section id='regresarACasa'>
+            
+        </section>
         <div class="flexCentradoTitulo">
             <h3 class="titulo">NOMBRE MATERIA</h3>
         </div>
@@ -44,7 +47,7 @@
                     <h3>Nombre del modulo</h3>
                 </a>  
             </div>
-            
+
         </section>
     </main>
     <?php

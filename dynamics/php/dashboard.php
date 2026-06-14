@@ -7,10 +7,9 @@
     <main>
         
         <section id="seccionDeAvisosPaginaPrincipal" class="seccionDeAvisos">
-                
+            
         </section>
-        <section id="contenedorEnlaces"
-        >
+        <section id="contenedorEnlaces">
             <section id="seccionPaginaEtes">
                 <a href="https://www.ete.enp.unam.mx/" target="_blank" rel="noopener noreferrer" class="cajaBlanca bordeNegro crezca cajaRedondeadaConPadding textoNaranja sinDelineado"> 
                 <!-- Referencia: https://www.freecodecamp.org/espanol/news/como-usar-html-para-abrir-un-link-en-un-tab-nuevo-->
