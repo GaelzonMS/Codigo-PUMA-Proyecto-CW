@@ -1,0 +1,28 @@
+#dashboardBody{
+    background-color: rgba(151, 150, 150, 0.493);
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#dashboardBody ::before{
+    content: none !important;
+    display: none !important;
+    
+}
+
+/*#navInicioSesion{
+    display: flex;
+    align-items: center;
+    background-color: rgb(43, 82, 220);
+    padding: 10px, 30px;
+    color: white;
+}
+
+#logosContenedor{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}*/
+
+
