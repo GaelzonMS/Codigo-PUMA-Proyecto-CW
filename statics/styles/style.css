@@ -202,6 +202,13 @@ desvanecido /*Es la animacion de cuando la contraseña aparece*/
     justify-content: space-around;
     gap: 10px;    
 }
+.separarDatos
+{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
 /*--------------------------ENCABEZADO, FOOTER: tamaños y contenedores*/
 .logo
 {
@@ -495,8 +502,6 @@ desvanecido /*Es la animacion de cuando la contraseña aparece*/
 /*#############################################################*/
 #seccionMateriales
 {
-    background-color: blueviolet;
-
     width: 100%;
     height: auto;
     margin: 10px 0 10px 0;
@@ -524,8 +529,6 @@ desvanecido /*Es la animacion de cuando la contraseña aparece*/
 /*#############################################################*/
 #seccionPerfilInformacion
 {
-    background-color: #e4b9b9;
-
     width: 100%;
     height: auto;
     padding: 15px;

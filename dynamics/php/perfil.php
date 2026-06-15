@@ -7,7 +7,6 @@
         exit(); // se sale de dashboard.php
     }
     include 'conexion.php';
-    
     include 'encabezadoFooter.php';
 ?>
 <?php
@@ -20,7 +19,7 @@
         <section id="seccionPerfilInformacion" class="textoNormal">
             <img src="../statics/media/pfpDefault.jpg" id="fotoPerfil" class="fotoPerfilGrande">
             <h4 class="textoNormal">Informacion Personal</h4>
-            <div>
+            <div class= 'separarDatos'>
                 <p>Nombre: Gael Vazquez Moreno</p>
                 <p>Correo: 324256350@alumno.enp.unam.mx</p>
                 <p>Numero de Cuenta: 324256350</p>
