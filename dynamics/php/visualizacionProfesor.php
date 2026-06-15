@@ -14,7 +14,6 @@
 
         $sqlMateria = "SELECT nombre FROM materia WHERE idMateria='$idMateriaSeleccionada'";
         $resultadoMateria = mysqli_query($conn, $sqlMateria);
-
         if($resultadoMateria && mysqli_num_rows($resultadoMateria) >  0)
         {
             $datosMateria =mysqli_fetch_assoc($resultadoMateria);

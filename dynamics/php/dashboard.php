@@ -10,6 +10,18 @@
     include 'encabezadoFooter.php';
     include 'conexion.php';
     echo $encabezado;
+    echo "<h1 class='titulo cienCentrado'>Bienvenidx ". $_SESSION['nombre'] ." </h1>";
+    $idAlumno = $_SESSION['idUsuario'];
+
+    $sqlMaterias = "
+                    SELECT m.idMateria, m.nombre AS nombreMateria
+                    FROM inscripcion i
+                    INNER JOIN materia m ON i.Materia_idMateria = m.idMateria
+                    WHERE i.Usuario_idUsuario = '$idAlumno'";
+
+    $resultadoSqlMaterias = mysqli_query($conn, $sqlMaterias);
+
+    
 ?>
     <main>
         
@@ -36,9 +48,27 @@
         <section id="seccionMateriasInscritas" class="cajaRedondeadaConPadding">
             <h4 class="textoBlanco glow">Materias inscritas</h4>
             <div id="materiasInscritas">
-                <a href="materia.php" class="previewMateria bordeNegro redondeo25px textoNgero sinDelineado crezca">
-                    <p>materia</p>
-                </a>
+                
+                <?php
+                    if ($resultadoSqlMaterias && mysqli_num_rows($resultadoSqlMaterias) > 0) 
+                    {
+                    
+                        while ($materia = mysqli_fetch_assoc($resultadoSqlMaterias)) 
+                        {
+                            $idMateria = $materia['idMateria'];
+                            $nombreMateria = $materia['nombreMateria'];
+                        
+                            echo "
+                            <a href='materia.php?idMateria=$idMateria' rel='noopener noreferrer' class='previewMateria bordeNegro redondeo25px textoNgero sinDelineado crezca'>
+                                <h4>$nombreMateria</h4>                            
+                            </a>";
+                        }
+                    }
+                    else 
+                    {
+                    echo "<p>Este alumno no tiene materias inscritas en la tabla 'inscripcion'.</p>";
+                    }
+                ?>
             </div>
         </section>
     </main>

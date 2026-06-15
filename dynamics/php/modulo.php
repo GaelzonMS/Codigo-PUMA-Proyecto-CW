@@ -7,7 +7,9 @@
         exit(); // se sale de dashboard.php
     }
     include 'conexion.php';
+
     
+
     include 'encabezadoFooter.php';
 ?>
 <?php
