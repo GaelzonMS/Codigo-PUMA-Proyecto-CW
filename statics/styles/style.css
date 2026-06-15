@@ -209,6 +209,16 @@ desvanecido /*Es la animacion de cuando la contraseña aparece*/
     align-items: start;
     gap: 10px;
 }
+.displayFlexalinearCentroConGap
+{
+    margin-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    
+}
 /*--------------------------ENCABEZADO, FOOTER: tamaños y contenedores*/
 .logo
 {

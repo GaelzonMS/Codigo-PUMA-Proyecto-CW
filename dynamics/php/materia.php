@@ -7,7 +7,6 @@
         exit(); // se sale de dashboard.php
     }
     include 'conexion.php';
-    include 'encabezadoFooter.php';
 
     if(isset($_GET['idMateria'])) // si si recibio un ?idmateria
     {
@@ -87,7 +86,10 @@
     $sqlModulos = "SELECT idModulo, nombreModulo, numModulo FROM modulo WHERE Materia_idMateria = '$idMateriaSeleccionada' ORDER BY numModulo ASC";
     $consultaModulos = mysqli_query($conn, $sqlModulos);
 ?>
-<?php echo $encabezado; ?>
+<?php 
+    include 'encabezadoFooter.php';
+    echo $encabezado; 
+?>
 <main>
     <div class="flexCentradoTitulo">
         <h3 class="titulo">

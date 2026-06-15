@@ -1,40 +1,93 @@
 <?php
+session_start();
+
+    if (!isset($_SESSION['idUsuario'])) //si no existe una sesion con id usuario
+    {
+        header("Location: ../../index.php"); // se regresa a index y pide que inicie sesion
+        exit(); // se sale de dashboard.php
+    }
+    include 'conexion.php';
+    //verificar si llego el ?idActividad = $idActividad;
+    if(isset($_GET['idActividad']))
+    {
+        //prompt
+        $idActividadSeleccionada = mysqli_real_escape_string($conn, $_GET['idActividad']); //evitamos inyecciones
+        $sqlActividadDatos = "SELECT
+                                    titulo,
+                                    fechaCreacion,
+                                    fechaLimite,
+                                    descrpcion,
+                                    archivoAdjunto,
+                                    puntosMax
+                                        FROM actividad WHERE idActividad='$idActividadSeleccionada'";
+        //consulta query
+        $consultaSqlActividadDatos = mysqli_query($conn, $sqlActividadDatos);
+        
+        // desmenusar consulta
+        if($consultaSqlActividadDatos && mysqli_num_rows($consultaSqlActividadDatos)>0)
+        {
+            $datosActividad = mysqli_fetch_assoc($consultaSqlActividadDatos);
+            $tituloActividad = $datosActividad['titulo'];
+            $fechaCreacionActividad = $datosActividad['fechaCreacion'];
+            $fechaLimiteActividad = $datosActividad['fechaLimite'];
+            $descripcionActividad = $datosActividad['descrpcion'];
+            $archivoAdjuntoActividad = $datosActividad['archivoAdjunto'];
+            $puntosMaxActividad = $datosActividad['puntosMax'];
+        }
+    }
+    else //si no regresar dashboard.php
+    {
+        header('Location: dashboard.php');
+        exit();
+    }
+
     include 'encabezadoFooter.php';
+    
 ?>
 <?php
     echo $encabezado;
 ?>
     <main id="mainActividadVisualizacion">
         <div class="flexCentradoTitulo">
-            <h3 class="textoNormal">ACTIVIDAD: nombre actividad</h3>
+            <h3 class="textoNormal">ACTIVIDAD: <?php echo $tituloActividad; ?></h3>
         </div>
         <section id="seccionInformacionActividadNOMBRE">
-            <p>Descripcion general de la actividad</p>
-            <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+            <p>Descripcion:</p>
+            <p><?php echo $descripcionActividad  ?></p>
         </section>
-        esto va a ser opcional si la actividad se tiene que subir algo
-        <section id="seccionSubirArchivosActividadNOMBRE">
-            <div>
-                <p>Subir archivos:</p>
-                <form>
-                    <input type="file">
-                </form>
-            </div>
+        <section id="seccionMostrarRecursos">
+            <?php 
+                if($archivoAdjuntoActividad !== null )
+                {
+                    echo "<img class='' src='".$archivoAdjuntoActividad."'>";
+                }
+                else
+                {
+                    echo "<p class='textoChiquito'>Sin archivo</p>";
+                }
+            ?>            
         </section>
-        <section id="seccionTablaDatosActividaDNOMBRE">
-            tabla que muestra los datos de la actividad
+        <section id="seccionTablaDatosActividad">
             <table style>
                 <tr>
-                    <td>Fecha limite</td>
-                    <td>aqui va la fecha</td>
+                    <td>Fecha creacion: </td>
+                    <td><?php echo $fechaCreacionActividad ?></td>
                 </tr>
                 <tr>
-                    <td>estatus</td>
-                    <td>entregado o no entregado</td>
+                    <td>Fecha limite: </td>
+                    <td><?php echo $fechaLimiteActividad?></td>
                 </tr>
                 <tr>
-                    <td>califiacion</td>
-                    <td>0/10</td>
+                    <td>puntaje:</td>
+                    <td>
+                    <?php 
+                        if($puntosMaxActividad !== null)
+                        {
+                            echo $puntosMaxActividad;
+                        }
+                        else
+                            echo "sin revisar";
+                    ?></td>
                 </tr>
             </table>
         </section>
