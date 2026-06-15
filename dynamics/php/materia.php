@@ -1,4 +1,13 @@
 <?php
+    session_start();
+
+    if (!isset($_SESSION['idUsuario'])) //si no existe una sesion con id usuario
+    {
+        header("Location: ../../index.php"); // se regresa a index y pide que inicie sesion
+        exit(); // se sale de dashboard.php
+    }
+    include 'conexion.php';
+    
     include 'encabezadoFooter.php';
 ?>
     <?php

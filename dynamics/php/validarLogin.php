@@ -24,7 +24,7 @@
 
                 if($usuario['Rol_idRol'] == 2 /*2=profesor*/) // si el rol del usuario es tal lo va a llevar a cierta vista
                 {
-                    header("Location: visualizacionProfesor.php");
+                    header("Location: dashboardProf.php");
                     exit();
                 }
                 else

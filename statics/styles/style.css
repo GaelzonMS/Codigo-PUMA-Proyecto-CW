@@ -141,6 +141,23 @@ desvanecido /*Es la animacion de cuando la contraseña aparece*/
     margin: 5px;
 }
 /*--------------------------atributos generales, como solo redondeo o x*/
+.contenedorOcupaTodo
+{
+    background-color: blue;
+
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.cienCentrado
+{
+    width: 100%;
+    margin: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .circulo
 {
     width: fit-content;

@@ -7,32 +7,48 @@
         exit(); // se sale de dashboard.php
     }
     include 'conexion.php';
-?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="autor" content="Equipo 9 CW 2026">
-    <meta name="descripcion" content="Pagina web para angi jeje">
-    <link rel="stylesheet" href="../../statics/styles/inicioDeSesion.css">
+    if(isset($_GET['idMateria']))
+    {
+        $idMateriaSeleccionada = mysqli_real_escape_string($conn, $_GET['idMateria']);
+
+        $sqlMateria = "SELECT nombre FROM materia WHERE idMateria='$idMateriaSeleccionada'";
+        $resultadoMateria = mysqli_query($conn, $sqlMateria);
+
+        if($resultadoMateria && mysqli_num_rows($resultadoMateria) >  0)
+        {
+            $datosMateria =mysqli_fetch_assoc($resultadoMateria);
+            $nombreMateria = $datosMateria['nombre'];
+        }
+        else
+        {
+            header("Location: dashboardProf.php");
+            exit();
+        }
+    }
+    else
+    {
+        header("Location: ../../index.html");
+    }
+
+    $sqlAlumnos = " SELECT u.idUsuario, u.nombre, u.apellidoPaterno, u.apellidoMaterno FROM inscripcion i INNER JOIN usuario u ON i.Usuario_idUsuario = u.idUsuario WHERE i.Materia_idMateria = '$idMateriaSeleccionada' ORDER BY u.apellidoPaterno, u.apellidoMaterno ASC";
+    $resultadoAlumnos = mysqli_query($conn, $sqlAlumnos);
+    $totalAlumnos = mysqli_num_rows($resultadoAlumnos);
+
+    $sqlModulos = "SELECT idModulo, nombreModulo, numModulo FROM modulo WHERE Materia_idMateria = '$idMateriaSeleccionada' ORDER BY numModulo ASC";
+    $resultadoModulos = mysqli_query($conn, $sqlModulos);
+
+    include 'encabezadoFooter.php';
+    echo $encabezado;
+?>
+<!-- ---------------------------------------------------------------------------------------- -->
     <link rel="stylesheet" href="../../statics/styles/vistaProfeMateria.css">
-    <title>vistaProfesorMateria</title>
-</head>
-<body id="dashboarBody">
-    <nav id="navInicioSesion">
-        <div id="logosContenedor">
-            <img src="https://yosoycide.com/wp-content/uploads/2020/03/unam-escudo.png" id="logoUnam" class="logo">
-            <img src="https://www.ete.enp.unam.mx/images/header_footer/logo_ete.svg" id="logoETE" class="logo">
-        </div>
-        <h1 id="tituloPaginaInicioDeSesion" clasS="titulo1">ETECHELP</h1>
-    </nav>
     
     <div class="contenedorMateria">
-        
         <header class="materiaHeader">
-            <h1>NOMBRE MATERIA</h1>
+            <h1>
+                Materia: <?php echo $nombreMateria; ?>
+            </h1>
         </header>
 
         <div class="seccionEstadisticas">
@@ -55,9 +71,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>nombre</td><td>faltas</td><td>promedio</td></tr>
-                            <tr><td>nombre</td><td>faltas</td><td>promedio</td></tr>
-                            <tr><td>nombre</td><td>faltas</td><td>promedio</td></tr>
+                            <?php
+                                if($totalAlumnos > 0)
+                                {
+                                    while($alumno = mysqli_fetch_assoc($resultadoAlumnos))
+                                    {
+                                        $nombreCompleto = $alumno['apellidoPaterno'] . " " . $alumno['apellidoMaterno'] . " " . $alumno['nombre'];
+
+                                        echo "
+                                            <tr><td>$nombreCompleto</td><td>faltas</td><td>promedio</td></tr>
+                                        ";
+                                    }
+                                }
+                                else
+                                {
+                                    echo "<tr><td colspan='3' style='text-align:center;'>No hay alumnos inscritos en esta materia.</td></tr>";
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -101,10 +131,28 @@
             <section class="columnaModulos">
                 <h2>Modulos</h2>
                 <div class="modulos">
-                    <div class="tarjetaModulo"><h3>Modulo 1</h3></div>
-                    <div class="tarjetaModulo"><h3>Modulo 2</h3></div>
-                    <div class="tarjetaModulo"><h3>Modulo 3</h3></div>
-                    <div class="tarjetaModulo"><h3>Modulo 4</h3></div>
+                    <?php 
+                        if($resultadoModulos && mysqli_num_rows($resultadoModulos) > 0)
+                        {
+
+                            while($modulo = mysqli_fetch_assoc($resultadoModulos))
+                            {
+                                $numModulo = $modulo['numModulo'];
+                                $nombreModulo = $modulo['nombreModulo'];
+                                $idModulo = $modulo['idModulo'];
+
+                                echo "
+                                    <div class='tarjetaModulo'>
+                                        <h3>Módulo $numModulo: $nombreModulo</h3>
+                                    </div>
+                                ";
+                            }
+                        }
+                        else
+                        {
+                            echo "<p>No se han registrado modulos para esta asignatura todavía.</p>";
+                        }
+                    ?>
                 </div>
             </section>
         </div>
