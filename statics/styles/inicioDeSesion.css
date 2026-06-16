@@ -2,22 +2,10 @@
 :root {
     --naranjaUnam: rgb(255, 217, 79);
     --azulUnam: rgb(75, 75, 209);
+    --azulUnamOscuro: #292c2f;
         
     --color-glow: #ffffffe3;
     --color-texto: #ffffff;
-    --color-texto_nollamativo: #c5c5c5; 
-    --color-fondo: #202020;
-    --color-blur: #c5c5c533;
-    --color-barra: #303030;
-    --color-icono-aside: #ffffff88;
-    --color-indicador: #221f1fbf;
-    --color-borde-indicador: #0303031c;
-    --color-buscador: #5a5a5ab6;
-    --color-resultado-busqueda-hover: #505050;
-    --color-resultado-busqueda: #303030b0;
-    --color-reproductor: #b0afaf27;
-    --color-icon-reproductor: #c5c5c5;
-    --color-reproduciendo-back-next-play-stop: #202020b8;
 }
 
 *
@@ -106,6 +94,10 @@ main
     border: 0;
 }
 /*--CLASES----------------------------------------------------------------------*/
+.cajaGris
+{
+    background-color: #202020;
+}
 .flexCentradoTitulo
 {
     background-color: aqua;
@@ -139,14 +131,7 @@ main
     border-radius: 25px;
     text-align: center;
     border: 1px solid black;
-    transition: 0.5s;
-}
-.inputLogin:hover
-{
-    transform: scale(1.2) translateX(20px) translateY(-2px);
-    background-color: rgba(0, 0, 0, 0.575);
-    color: #ffffff;
-    filter:drop-shadow(10px 10px 10px black);
+    color: white;
 }
 .botonTipo1
 {
@@ -225,6 +210,11 @@ main
     padding: 10px;
     border-radius: 25px;
 }
+.mensajeErrorLogIn
+{
+    color: rgb(255, 86, 86);
+    font-size: 0.7em;
+}
 /*-----------------------LOGO UNAM-------------------------------*/
 #inicioDeSesionBody
 {
@@ -247,7 +237,7 @@ main
 }
 #navInicioSesion
 {
-    background-color: var(--naranjaUnam);
+    background-color: var(--azulUnamOscuro);
     height: 13vh;
 
     width: 100%;
