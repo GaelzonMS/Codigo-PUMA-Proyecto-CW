@@ -14,9 +14,9 @@
     $idProfesor = $_SESSION['idUsuario'];
 
     $sqlMateria = "SELECT m.idMateria, m.nombre AS nombreMateria
-                    FROM ete e
-                    INNER JOIN materia m ON e.Materia_idMateria = m.idMateria
-                    WHERE e.Usuario_idUsuario = '$idProfesor'";
+                    FROM inscripcion i
+                    INNER JOIN materia m ON i.Materia_idMateria = m.idMateria
+                    WHERE i.Usuario_idUsuario = '$idProfesor'";
     
     $resultado = mysqli_query($conn, $sqlMateria);
 ?>

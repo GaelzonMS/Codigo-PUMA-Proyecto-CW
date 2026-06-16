@@ -34,6 +34,27 @@ session_start();
             $archivoAdjuntoActividad = $datosActividad['archivoAdjunto'];
             $puntosMaxActividad = $datosActividad['puntosMax'];
         }
+
+        $sqlCalificacionAlumno = "SELECT calificacion FROM entrega
+                                        WHERE Actividad_idActividad='$idActividadSeleccionada'
+                                        AND Usuario_idUsuario='".$_SESSION['idUsuario']."'";
+        $consultaCalificacionAlumno = mysqli_query($conn, $sqlCalificacionAlumno);
+        if($consultaCalificacionAlumno && mysqli_num_rows($consultaCalificacionAlumno)>0)
+        {
+            $fetchCalificacion = mysqli_fetch_assoc($consultaCalificacionAlumno);
+            $calificacionAlumno = $fetchCalificacion['calificacion'];
+        }
+        else
+        {
+            if(mysqli_num_rows($consultaCalificacionAlumno)==0)
+            {
+                $calificacionAlumno = "No existe entrega";
+            }
+            else
+            {
+                $calificacionAlumno = "sin evaluar";
+            }
+        }
     }
     else //si no regresar dashboard.php
     {
@@ -83,7 +104,7 @@ session_start();
                     <?php 
                         if($puntosMaxActividad !== null)
                         {
-                            echo $puntosMaxActividad;
+                            echo $calificacionAlumno."/".$puntosMaxActividad;
                         }
                         else
                             echo "sin revisar";
