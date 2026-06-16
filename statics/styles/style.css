@@ -1,0 +1,582 @@
+:root 
+{
+    --naranjaUnam: rgb(255, 217, 79);
+    --azulUnamOscuro: #292c2f;     
+    --color-glow: #ffffffe3;
+    --color-texto: #ffffff;
+    --color-texto_nollamativo: #c5c5c5; 
+    --colorNaranjaHref: #ffa537;
+}
+::-webkit-scrollbar  /*Con esto se quita el scrollbar que trae por defecto el navegador https://es.stackoverflow.com/questions/56179/como-ocultar-el-scrollbar*/ 
+{
+    display: none;
+}
+/*----------------GENERALES, etiquetas semanticas-------------------------------------------------------------------------------------------------------*/
+*
+{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    border: 0;
+}
+body
+{
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+nav
+{
+    padding: 20px;
+    width: auto;
+}
+main
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+/*-----------ANIMACIONES------------*/
+@keyframes /*fuente: https://developer.mozilla.org/es/docs/Web/CSS/Reference/At-rules/@keyframes*/
+desvanecido /*Es la animacion de cuando la contraseña aparece*/
+{ 
+    from 
+    {
+        opacity:0;
+        transform: translateY(20px);
+    }
+    to 
+    {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.crezca
+{
+    transition: transform 1s;
+}
+.crezca:hover
+{
+    transform: scale(1.03);
+}
+.glow
+{
+    transition: filter 0.6s;
+}
+.glow:hover
+{
+    filter:drop-shadow(0px 0px 6px var(--color-glow))
+}
+.glow_crezca
+{
+    transition: transform 1s, filter 0.6s;
+}
+.glow_crezca:hover
+{
+    transform: scale(1.2);
+    filter:drop-shadow(0px 0px 6px var(--color-glow))
+}
+.blur
+{
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.286);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: 1s transform;
+}
+.blur:hover
+{
+    transform: scale(1.02);
+}
+.blur_color
+{
+    background-color: var(--color-blur);
+}
+.animar-aparicion
+{
+    animation: desvanecido 1s ease;
+}
+/*-----------*/
+/*---------------------------------------CLASES----------------------------------------------------------------------*/
+/*--------------------------texto*/
+.sinDelineado
+{
+    text-decoration: none;
+}
+.textoNaranja
+{
+    color: var(--colorNaranjaHref);
+}
+.textoNgero
+{
+    color: black;
+}
+.textoBlanco
+{
+    color: white;
+}
+.textoBlancoConBrillo
+{
+    color: #ffffff;
+    filter: drop-shadow(0 0 5px white);
+}
+.textoBlancoTransparente
+{
+    color: #ffffffbb !important;
+}
+.titulo
+{
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+.textoChiquito
+{
+    font-size: 0.7em;
+}
+/*textoflex*/
+.flexCentradoTitulo
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+/*--------------------------atributos generales, como solo redondeo o x*/
+.centrarContenido {
+    text-align: center;
+}
+.contenedorBusqueda 
+{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.formulario {
+    background-color: #FFFFFF;
+    display: inline-block;
+    padding: 30px;
+    border: 3px solid #000000;
+    border-radius: 10px;
+    box-shadow: 4px 4px 0px #000000;
+}
+
+.contenedorOcupaTodo
+{
+
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.cienCentrado
+{
+    width: 100%;
+    margin: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.circulo
+{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+.cajaBlanca
+{
+    background-color: white;
+}.bordeNegro
+{
+    border: 1px solid black;
+}
+.redondeo25px
+{
+    border-radius: 25px;
+}
+.fillBlanco
+{
+    filter: brightness(0) invert(1) opacity(0.8);
+    transition: 0.5s;
+}
+.fillBlanco:hover
+{
+    filter: brightness(0) invert(1) opacity(1);
+}
+.cajaRedondeadaConPadding
+{
+    height: 100%;
+    width: fit-content;
+    border-radius: 25px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;    
+}
+.separarDatos
+{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
+.displayFlexalinearCentroConGap
+{
+    margin-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    
+}
+.btnGris
+{
+    background-color: rgb(104, 104, 104);
+    padding: 10px;
+}
+.centrarTomandoTodoElAnchoRow
+{
+    width: 100vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+/*--------------------------ENCABEZADO, FOOTER: tamaños y contenedores*/
+.logo
+{
+    display: block;
+    height: 70px;
+    width: auto;
+}
+.fotoPerfilChiquita
+{
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    border: 4px solid rgba(0, 0, 0, 0.234);
+    /*??? pq no respeta el nav el padding?*/ margin-right: 10px;
+}
+.footerGeneral
+{
+    background-color: var(--azulUnamOscuro);
+
+
+    width: 100%;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+/*-------------------------animacion especifica para x elemento*/
+.botonTipo1
+{
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    background-color: var(--azulUnam);
+    color: #ffffff9d;
+    border: 3px solid var(--naranjaUnam);
+    border-radius: 10px;
+    filter:drop-shadow(0 0 5px var(--naranjaUnam));
+    transition: 0.7s;
+}
+.botonTipo1:hover
+{
+    padding: 10px;
+    background-color: var(--naranjaUnam);
+    color: var(--azulUnam);
+    border: 3px solid var(--azulUnam);
+    border-radius: 10px;
+    filter:drop-shadow(0 0 10px var(--azulUnam));
+}
+/*---------------------clase[dashboard.php]*/
+.seccionDeAvisos
+{
+    background-color: rgba(1, 1, 1, 0.437);
+
+    width: auto;
+    height: 40vh;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+.previewMateria
+{
+    background-color: #ffffff93;
+
+    width: 100%;
+    height: auto;
+    margin: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0 50px 0;
+}
+/*---------------------clase[materia.php]*/
+.tablaDatosMateria
+{
+    width: fit-content;
+    margin: 10px;
+    border-collapse: collapse;     /*https://www.mclibre.org/consultar/htmlcss/css/css-tablas-modos-bordes.html*/
+
+}
+.tablaDatosMateriaBorde tr td
+{
+    border: 1px solid black;
+    padding: 10px;
+}
+.seccionInformacionDeLaMateria
+{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.hrefPlanEstudios
+{
+    background-color: var(--azulUnamOscuro);
+
+    height: auto;
+    width: 50%;
+    border-radius: 25px;
+    padding: 5px 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   
+    gap: 10px;
+}
+
+.seccionModulos
+{
+    background-color: #0000002d;
+    width: 100vw;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    
+}
+.contenedorDeBotonesModulo
+{
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.contenedorDeBotonesModulo 
+{
+    flex-wrap: wrap;
+}
+
+.contenedorDeBotonesModulo > a
+{
+    min-width: 140px;
+}
+.contenedorNombreModuloVistaMateria
+{
+    background-color: #ffffff;
+
+    margin: 5px;
+    padding: 15px;
+    border-radius: 25px;
+    border: 1px solid black;
+
+    color: var(--colorNaranjaHref);
+    text-decoration: none;
+}
+/*---------------------clase[perfil.php]*/
+.fotoPerfilGrande
+{
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    border: 4px solid rgba(0, 0, 0, 0.234);
+}
+/*---------------------clase[modulo.php]*/
+.despliegeDeTema
+{
+    width: auto;
+    height: fit-content;
+    margin: 10px 15px;
+    padding: 10px;
+    border-radius: 25px;
+}
+/*------------------------------------------------------*/
+/*------------------------------------------------------*/
+/*----------------------IDs-----------------------------*/
+/*------------------------------------------------------*/
+/*------------------------------------------------------*/
+/*######################################################*/
+/*----------------------Nav y footer*/
+/*nav*/
+#navGeneral
+{
+    background-color: var(--azulUnamOscuro);
+
+    height: 13vh;
+    width: 100vw;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: #ffffff;
+}
+#logosContenedor
+{
+    height: fit-content;
+    width: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+/*footer*/
+#divDirecciones
+{
+
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+#divEnlacesAcuerdosYCreditos
+{
+    width: auto;
+    height: auto;
+    padding: 10px;
+
+    display: flex;
+    flex-direction:column;
+    gap: 5px;
+    align-items: center;
+}
+#logosFooter
+{
+    width: 100%;
+    height: fit-content;
+    margin: 10px;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+/*###########################################*/
+/*----------------------------pagina principal*/
+/*###########################################*/
+#contenedorEnlaces
+{
+    width: auto;
+    height: 15vh;
+    margin: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#imagenLogoSitioEtes
+{
+    height: 70px;
+}
+#seccionMateriasInscritas
+{
+    background-color: var(--azulUnamOscuro);
+
+    width: auto;
+    height: auto;
+    margin: 10px;
+    padding: 19px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#materiasInscritas
+{
+    width: 100%;
+    height: auto;
+
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+/*#################################################################*/
+/*------------------------------------Vista de materia[materia.php]*/
+/*#################################################################*/
+
+
+/*#############################################################*/
+/*---------------------------------Vista de Modulo [modulo.php]*/
+/*#############################################################*/
+#seccionMateriales
+{
+    width: 100%;
+    height: auto;
+    margin: 10px 0 10px 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+/*####################################################################*/
+/*----------------------------------Vista de actividad [actividad.php]*/
+/*####################################################################*/
+#mainActividadVisualizacion
+{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+/*#############################################################*/
+/*---------------------------------Vista de perfil [perfil.php]*/
+/*#############################################################*/
+#seccionPerfilInformacion
+{
+    width: 100%;
+    height: auto;
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+/*------------------------------------------------------*/
