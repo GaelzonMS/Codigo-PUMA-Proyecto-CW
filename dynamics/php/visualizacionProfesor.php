@@ -51,11 +51,12 @@
     $consultaSqlTotalClases =  mysqli_query($conn, $sqlTotalClases);
     $fetchConsultaSqlTotalClases = mysqli_fetch_assoc($consultaSqlTotalClases);
     //condicionar terniaria!!, verifica si el total de las clases es mayor a 0, sino le va asignar uno como default, esto para no tener problemas al momento de dividirlo mas adelante
-    $totalClases = ($fetchConsultaSqlTotalClases['totalClases']>0) ? $fetchConsultaSqlTotalClases['totalClases'] : 1;
+    $totalClases = ($fetchConsultaSqlTotalClases['totalClases']>0) ? 
+                    $fetchConsultaSqlTotalClases['totalClases'] : 1;
     //arreglo multidimensional para guardar alumnos
     $alumnosProcesados = [];
     $porcentajeAlumnoDesercion = 0; //la inicializamos por si llega a no haber alumnos 
-    //verificacion
+    //verificacion si es que hay alumnos
     if($totalAlumnos > 0)
     {
         $iRiesgo = 0; //vairable bandera para sacar el % de alumnos en desercion
@@ -108,7 +109,7 @@
                 'riesgo' => $enRiesgo
             ];
         }//fin del while
-        $porcentajeAlumnoDesercion= ($iRiesgo/$totalAlumnos)*100; //creamos este porcentaje para imprimirlo abajo, indicara cuantos alumnos de los totales estan en riesgo de desertar
+        $porcentajeAlumnoDesercion= round(($iRiesgo/$totalAlumnos)*100, 1); //creamos este porcentaje para imprimirlo abajo, indicara cuantos alumnos de los totales estan en riesgo de desertar
     };//fin verificacion de si hay alumnos
 //////////////////////////////////////////
 ////// consulta para sacar los modulos de la materia para despues imprimirlos
@@ -149,6 +150,7 @@
                         </thead>
                         <tbody>
                             <?php
+                            // logica para imprimir a todos los alumnos como lista
                                 if(!empty($alumnosProcesados))
                                 {
                                     foreach($alumnosProcesados as $eachAlumno)
@@ -193,7 +195,8 @@
                         </thead>
                         <tbody>
                             <?php
-                                $hayAlumnosEnRiesgo = false;
+                            //logica de imprimir los alumnos en riesgo dedesercion
+                                $hayAlumnosEnRiesgo = false; //establecer  una variable para un if para saber si si existen alumnos en riesgo o no y de ahi poder desplegar el "riesgo"
                                 if(!empty($alumnosProcesados))
                                 {
                                     foreach($alumnosProcesados as $eachAlumno)
@@ -211,7 +214,7 @@
                                         }
                                     }
                                 }
-                                // Si recorrimos el arreglo pero nadie cumplió la condición de riesgo
+                                // Si recorrimos el arreglo pero nadie cumplió la condición de riesgo imprimimos que no hay alumnos en riesgo
                                 if(!$hayAlumnosEnRiesgo)
                                 {
                                     echo "<tr><td colspan='3' style='text-align:center; color: green;'>Excelente: No hay alumnos en riesgo de deserción.</td></tr>";
@@ -280,6 +283,24 @@
                         }
                     ?>
                     <a href='crearModulo.php?idMateria=<?php echo $idMateriaSeleccionada?>' rel='noopener noreferrer'>crear nuevo modulo</a>
+                    <?php
+                            //logica para cachar la variable get del estatus enviado por el procesador de calificaciones
+                        if (isset($_GET['status']))
+                        {
+                            echo "<div class='contenedorMensajeSistema'>";
+                            
+                            if ($_GET['status'] === 'exito')
+                            {
+                                echo "<p class='mensajeExito'><strong>Se creo la actividad</strong></p>";
+                            }
+                            else 
+                                if ($_GET['status'] === 'error')
+                                {
+                                    echo "<p class='mensajeError'><strong>Hubo un problema al intentar crear la actividad (flop).</strong></p>";
+                                }                    
+                        echo "</div>";
+                        }
+                    ?>
                 </div>
             </section>
         </div>

@@ -44,7 +44,7 @@
         exit();
     }
     ///////////////// CONSULTA DE ALUMNOS INSCRITOS Y SUS ENTREGAS
-    //ocupamos un left join con la tabla entrega para traer a todos los alumnos inscritos forcitas, sin importar si han entregado o no la actividad
+    //ocupamos un left join con la tabla entrega para traer a todos los alumnos inscritos , sin importar si han entregado o no la actividad
     //si el idEntrega es nulo significa que el alumno no ha subido ningun archivo para esta actividad especifica
     $sqlEntregas = "SELECT u.idUsuario, u.nombre, u.apellidoPaterno, u.apellidoMaterno, e.idEntrega, e.calificacion, (CASE WHEN e.idEntrega IS NOT NULL THEN 'Sí' ELSE 'No' END) AS obtuvoEntrega
                     FROM inscripcion i INNER JOIN usuario u
