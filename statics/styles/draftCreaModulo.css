@@ -1,0 +1,33 @@
+.centrarContenido{
+    background-color: rgb(133, 132, 170);
+    
+}
+
+.texto{
+    font-family:fantasy;
+    border: 1px solid black;
+}
+
+.botonGuardado {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+    border: 3px solid rgb(42, 42, 244);
+    border-radius: 20px;
+}
+
+.titulo{
+    font-size: 100em ; 
+    font-style: oblique;
+}
+
+.tituloDos{
+    font-style: italic;
+    background-color: rgb(208, 199, 77);
+    border: 2px solid rgb(0, 102, 255);
+    border-radius: 10px;
+
+}
+
+.formulario input{
+    background-color: rgb(205, 216, 216);
+}

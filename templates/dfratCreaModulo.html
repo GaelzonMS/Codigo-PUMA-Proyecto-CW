@@ -2,25 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="autor" content="Equipo 9 CW 2026">
+    <meta name="descripcion" content="Pagina web para angi jeje">
+    <link rel="stylesheet" href="../statics/styles/draftCreaModulo.css">
     <link rel="stylesheet" href="../statics/styles/style.css">
 </head>
 <body class="centrarContenido">
     <div class="encabezado">
-        <h1>Crear nuevo modulo</h1>
+        <h1 class="titulo">Crear nuevo modulo</h1>
     </div>
     <div class="contenedorBusqueda">
         <div class="formulario">
-            <h2>Añadir un nuevo Set</h2>
+            <h2 class="tituloDos">Añadir un nuevo Set</h2>
             
             <form action="guardar.php" method="POST" class="contenedorBusqueda">
                 
-                <label>Numero del modulo:</label>
+                <label class="texto">Numero del modulo:</label>
                 <input type="text" name="numModulo" required>
 
-                <label>Nombre del modulo:</label>
+                <label class="texto">Nombre del modulo:</label>
                 <input type="text" name="nombreModulo" required>
 
-                <label>Descripcion:</label>
+                <label class="texto">Descripcion:</label>
                 <input type="modulo" name="descripcion" required>
 
                 <!-- <label>Número de Piezas:</label>
@@ -42,7 +45,7 @@
                     ?>
                 </select>
                 -->
-                <input type="submit" value="Guardar modulo">
+                <input class="botonGuardado" type="submit" value="Guardar modulo">
             </form>
         </div>
     </div>
