@@ -7,32 +7,36 @@
         exit(); // se sale de dashboard.php
     }
     include 'conexion.php';
-////////////verifica si le llego un metodo ? get
-    if(isset($_GET['idMateria']))
+
+//////////// verifica si le llego el idModulo por GET
+    if(isset($_GET['idModulo']))
     {
-        $idMateriaSeleccionada = mysqli_real_escape_string($conn, $_GET['idMateria']); //evitamos una inyeccion de datos
-        //prompt para consulta sql obtiene nombre de la materia
-        $sqlMateria = "SELECT nombre FROM materia WHERE idMateria='$idMateriaSeleccionada'";
-        //consulta 
-        $resultadoMateria = mysqli_query($conn, $sqlMateria); 
-        //verifiacion de que si se hizo bn el query, demenusacion jeje
-        if($resultadoMateria)
+        $idModuloSeleccionado = mysqli_real_escape_string($conn, $_GET['idModulo']); //evitamos una inyeccion de datos
+        
+        $sqlModulo = "SELECT nombreModulo, numModulo, descripcion, Materia_idMateria FROM modulo WHERE idModulo='$idModuloSeleccionado'";
+        $resultadoModulo = mysqli_query($conn, $sqlModulo); 
+        
+        if($resultadoModulo && mysqli_num_rows($resultadoModulo) > 0)
         {
-            $datosMateria =mysqli_fetch_assoc($resultadoMateria); // array asociativo del nombre de la materia
-            $nombreMateria = $datosMateria['nombre']; //guardamos el nombre en una variable para despues deslpegarla como titulo
+            $datosModulo = mysqli_fetch_assoc($resultadoModulo); 
+            $nombreModulo = $datosModulo['nombreModulo']; 
+            $numModulo    = $datosModulo['numModulo'];
+            $descripcion  = $datosModulo['descripcion'];
+            $idMateriaSeleccionada = $datosModulo['Materia_idMateria'];
         }
         else
-        { //si no encuentra la materia por el sql te regresa al dashboard
+        { //si no encuentra el modulo por el sql te regresa al dashboard
             header("Location: dashboardProf.php");
             exit();
         }
-    } //si no encuentra la materia por la url se regresa a index
+    } 
     else
     {
         header("Location: ../../index.html");
         exit();
     }
-    ///////////////// CONSULTA DE ALUMNOS que esten inscritos en la materia y a su ves tengan como profe al user (en este caso al meter la condicion con la materia ya los relacionamos con el profe)
+
+    ///////////////// CONSULTA DE ALUMNOS
     $sqlAlumnos = "SELECT u.idUsuario, u.nombre, u.apellidoPaterno, u.apellidoMaterno,
                 (SELECT COUNT(*) FROM asistencia a WHERE a.Usuario_idUsuario = u.idUsuario AND a.campo = 'Ausente') AS totalFaltas
                 FROM inscripcion i INNER JOIN usuario u 
@@ -41,91 +45,81 @@
                 ORDER BY u.apellidoPaterno, u.apellidoMaterno ASC";                    
     $resultadoAlumnos = mysqli_query($conn, $sqlAlumnos);
     $totalAlumnos = mysqli_num_rows($resultadoAlumnos);
-/////////////logica de como obtener las faltas
-////////hacemos un count de cuantas fechas hay en asistencia
+    
+    ///////////// Logica de clases totales de la materia
     $sqlTotalClases = "SELECT COUNT(DISTINCT a.fecha) AS totalClases
                         FROM asistencia a INNER JOIN inscripcion i
                         ON a.Usuario_idUsuario = i.Usuario_idUsuario
                         WHERE i.Materia_idMateria = '$idMateriaSeleccionada'";
-////////consulta y asociacion
-    $consultaSqlTotalClases =  mysqli_query($conn, $sqlTotalClases);
+    $consultaSqlTotalClases = mysqli_query($conn, $sqlTotalClases);
     $fetchConsultaSqlTotalClases = mysqli_fetch_assoc($consultaSqlTotalClases);
-    //condicionar terniaria!!, verifica si el total de las clases es mayor a 0, sino le va asignar uno como default, esto para no tener problemas al momento de dividirlo mas adelante
-    $totalClases = ($fetchConsultaSqlTotalClases['totalClases']>0) ? $fetchConsultaSqlTotalClases['totalClases'] : 1;
-    //arreglo multidimensional para guardar alumnos
+    $totalClases = ($fetchConsultaSqlTotalClases['totalClases'] > 0) ? $fetchConsultaSqlTotalClases['totalClases'] : 1;
+
+    // Arreglo multidimensional para guardar alumnos procesados
     $alumnosProcesados = [];
-    $porcentajeAlumnoDesercion = 0; //la inicializamos por si llega a no haber alumnos 
-    //verificacion
+    $porcentajeAlumnoDesercion = 0; 
     if($totalAlumnos > 0)
     {
-        $iRiesgo = 0; //vairable bandera para sacar el % de alumnos en desercion
-        //mientras que se cree el arreglo asociativo de la consulta de alumnos
+        $iRiesgo = 0; 
         while($alumno = mysqli_fetch_assoc($resultadoAlumnos))
         {
-            //creamos momentaneamente el nombre completo del alumno de esa iteracion
             $nombreCompleto = $alumno['apellidoPaterno']. " " . $alumno['apellidoMaterno'] . " " . $alumno['nombre'];
-            $faltas = $alumno['totalFaltas']; //igual las faltas 
-            $idAlumno = $alumno['idUsuario']; // y su usuario
-            //inicializamos variables de promedio
+            $faltas = $alumno['totalFaltas']; 
+            $idAlumno = $alumno['idUsuario']; 
             $promedio = "-";
             $promedioAEvaluar = 0;
-            //consulta de promedio de c/alumno
-            $sqlPromedio="SELECT AVG(calificacion) AS promedioAlumno FROM entrega 
-                            INNER JOIN actividad ON entrega.Actividad_idActividad = actividad.idActividad
-                            INNER JOIN modulo On actividad.Modulo_idModulo = modulo.idModulo
-                            WHERE Usuario_idUsuario='".$alumno['idUsuario']."'
-                            AND modulo.Materia_idMateria = '$idMateriaSeleccionada'";
-            //consulta
+            //calculamos el promedio por las actividades rel al modulo actual
+            $sqlPromedio = "SELECT AVG(calificacion) AS promedioAlumno 
+                            FROM entrega INNER JOIN actividad 
+                            ON entrega.Actividad_idActividad = actividad.idActividad
+                            WHERE Usuario_idUsuario='$idAlumno'
+                            AND actividad.Modulo_idModulo = '$idModuloSeleccionado'";
             $resultadoPromedio = mysqli_query($conn, $sqlPromedio);
-            //si se hizo bien la consulta
             if($resultadoPromedio)
             {
-                //crea el arreglo asociativo
                 $fetchPromedio = mysqli_fetch_assoc($resultadoPromedio);
-                //verifica que no sea null
                 if($fetchPromedio['promedioAlumno'] !== null)
-                {   //guarda en la variable promedio el redondeo a un decimal del promedio del alumno de esa iteracion
+                {   
                     $promedio = round($fetchPromedio['promedioAlumno'], 1);
                     $promedioAEvaluar = $promedio; 
                 }
             }
-            //!seguimos en la misma iteracion
-            //creamos la condicion de desercion, primero creamos un porcentaje de cuantas faltas tiene sobre el total de las clases
-            $porcentajeFaltas = ($faltas/$totalClases)*100;
-            $promedioAEvaluar = ($promedio !== null)? $promedio : 0; //si no tiene promedio le ponemos 0
-            $enRiesgo = false; //variable bandera para mas adelante ocuparla como indicador en el html
-            if($porcentajeFaltas > 20 && $promedioAEvaluar<8) //tomamos que si el porcentaje de faltas sube de 20% y mas aparte el promedio es menos de 8, hay una probabilidad de desercion;
+            // condicion de desercion basada en las faltas generales y promedio
+            $porcentajeFaltas = ($faltas / $totalClases) * 100;
+            $enRiesgo = false; 
+            if($porcentajeFaltas > 20 || $promedioAEvaluar < 8) 
             {
-                $enRiesgo = true; // el indicador cambia a tru
+                $enRiesgo = true; 
                 $iRiesgo++;
             }
-            //guardamos info en el gran array jeje, guardamos todo lo que generamos en esta iteracion del while
-            $alumnosProcesados[]=
+            $alumnosProcesados[] = 
             [
                 'nombre' => $nombreCompleto, 
                 'faltas' => $faltas,
                 'promedio' => $promedio,
                 'riesgo' => $enRiesgo
             ];
-        }//fin del while
-        $porcentajeAlumnoDesercion= ($iRiesgo/$totalAlumnos)*100; //creamos este porcentaje para imprimirlo abajo, indicara cuantos alumnos de los totales estan en riesgo de desertar
-    };//fin verificacion de si hay alumnos
-//////////////////////////////////////////
-////// consulta para sacar los modulos de la materia para despues imprimirlos
-    $sqlModulos = "SELECT idModulo, nombreModulo, numModulo FROM modulo WHERE Materia_idMateria = '$idMateriaSeleccionada' ORDER BY numModulo ASC";
-    $resultadoModulos = mysqli_query($conn, $sqlModulos);
-////incluimos nuestra minibiblioteca para poner el nav y el footer y datos html
+        }
+        $porcentajeAlumnoDesercion = round(($iRiesgo / $totalAlumnos) * 100, 1); 
+    }
+    $sqlActividades = "SELECT idActividad, titulo 
+                    FROM actividad WHERE Modulo_idModulo = '$idModuloSeleccionado' 
+                    ORDER BY idActividad DESC"; //de mas a menos recientes
+
+$resultadoActividades = mysqli_query($conn, $sqlActividades);
+$totalActividades = mysqli_num_rows($resultadoActividades);
+
     include 'encabezadoFooter.php';
     echo $encabezado;
 ?>
-<!-- ---------------------------------------------------------------------------------------- -->
-    <link rel="stylesheet" href="../../statics/styles/vistaProfeMateria.css">
+<link rel="stylesheet" href="../../statics/styles/vistaProfeMateria.css">
     
     <div class="contenedorMateria">
         <header class="materiaHeader">
             <h1>
-                Materia: <?php echo $nombreMateria; ?>
+                Módulo <?php echo $numModulo; ?>: <?php echo $nombreModulo; ?>
             </h1>
+            <p style="color: #666; margin-top: 5px; font-style: italic;"><?php echo $descripcion; ?></p>
         </header>
 
         <div class="seccionEstadisticas">
@@ -143,8 +137,8 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Faltas</th>
-                                <th>Promedio</th>
+                                <th>Faltas (Materia)</th>
+                                <th>Promedio del Módulo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -164,7 +158,7 @@
                                 }
                                 else
                                 {
-                                    echo "<tr><td colspan='3' style='text-align:center;'>No hay alumnos inscritos en esta materia.</td></tr>";
+                                    echo "<tr><td colspan='3' style='text-align:center;'>No hay alumnos evaluados en este módulo.</td></tr>";
                                 }
                             ?>
                         </tbody>
@@ -174,21 +168,19 @@
 
             <details class="bloquedesplegable">
                 <summary class="bloqueEstadistico alerta">
-                    <p class="numeroDato">
-                        <?php echo $porcentajeAlumnoDesercion;?>    
-                    %</p>
-                    <p class="etiquetaDato">Alumnos de desercion</p>
-                    <p class="textoAyuda">Ver los alumnos en riesgo</p>
+                    <p class="numeroDato"><?php echo $porcentajeAlumnoDesercion;?>%</p>
+                    <p class="etiquetaDato">Alumnos en riesgo de deserción</p>
+                    <p class="textoAyuda">Ver</p>
                 </summary>
                 
                 <div class="contenedorTabla">
-                    <h3>Alumnos en Riesgo de Desercion</h3>
+                    <h3> Asistencia de menos de 80% y promedio menor a 8</h3>
                     <table class="tablaAlumnos">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Faltas</th>
-                                <th>Promedio</th>
+                                <th>Promedio Módulo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -211,10 +203,9 @@
                                         }
                                     }
                                 }
-                                // Si recorrimos el arreglo pero nadie cumplió la condición de riesgo
                                 if(!$hayAlumnosEnRiesgo)
                                 {
-                                    echo "<tr><td colspan='3' style='text-align:center; color: green;'>Excelente: No hay alumnos en riesgo de deserción.</td></tr>";
+                                    echo "<tr><td colspan='3' style='text-align:center; color: green;'>Excelente: Ningún alumno está en riesgo en este módulo.</td></tr>";
                                 }
                             ?>
                         </tbody>
@@ -224,8 +215,7 @@
 
             <div class="bloquedesplegable">
                 <div class="bloqueEstadistico neutro">
-                    <p class="numeroDato">promedio</p>
-                    <p class="etiquetaDato">
+                    <p class="numeroDato">
                         <?php 
                             if(!empty($alumnosProcesados))
                             {
@@ -235,55 +225,53 @@
                                 {
                                     if(is_numeric($eachAlumno['promedio']))
                                     {
-                                        $sumaPromedios= $sumaPromedios + $eachAlumno['promedio'];
+                                        $sumaPromedios += $eachAlumno['promedio'];
                                         $i++;
                                     }
                                 }
-                                $promedioGrupo = ($i > 0) ? round($sumaPromedios/ $i, 1) : "-";
+                                $promedioGrupo = ($i > 0) ? round($sumaPromedios / $i, 1) : "-";
                                 echo $promedioGrupo;
                             }
                             else
                             {
-                                echo "No existen alumnos registrados para obtener el promedio";
+                                echo "-";
                             }
-                            
                         ?>
                     </p>
+                    <p class="etiquetaDato">Promedio General Módulo</p>
                 </div>
             </div>
-
         </div>
-
         <div class="pantallaDividida">
             <section class="columnaModulos">
-                <h2>Modulos</h2>
+                <h2>Actividades del Módulo</h2>
                 <div class="modulos">
-                    <?php 
-                        if($resultadoModulos && mysqli_num_rows($resultadoModulos) > 0)
-                        {
-                            while($modulo = mysqli_fetch_assoc($resultadoModulos))
+                    <a href="crearActividad.php?idModulo=<?php echo $idModuloSeleccionado; ?>" class="btn-crear" style="margin-bottom: 15px; display: inline-block;"> + Crear nueva actividad </a>
+                    <p>Aquí crear actividades para este modulo.</p>
+                    <hr>
+                    <div class="lista-actividades">
+                        <?php
+                            if($totalActividades > 0)
                             {
-                                $numModulo = $modulo['numModulo'];
-                                $nombreModulo = $modulo['nombreModulo'];
-                                $idModulo = $modulo['idModulo'];
-
-                                echo "
-                                    <div class='tarjetaModulo'>
-                                        <a href='moduloProfe.php?idModulo=$idModulo' rel='noopener noreferrer' class='sinDelineado textoNaranja'>Módulo $numModulo: $nombreModulo</a>
-                                    </div>
-                                ";
+                                while($actividad = mysqli_fetch_assoc($resultadoActividades))
+                                {
+                                    echo"
+                                        <div class='tarjetaModulo'>
+                                            <a href='actividadProfe.php?idActividad=".$actividad['idActividad']."' rel='noopener noreferrer' class='sinDelineado textoNaranja'>".$actividad['titulo']."</a>
+                                        </div>
+                                        ";
+                                        
+                                }
                             }
-                        }
-                        else
-                        {
-                            echo "<p>No se han registrado modulos para esta asignatura todavía.</p>";
-                        }
-                    ?>
-                    <a href='crearModulo.php?idMateria=<?php echo $idMateriaSeleccionada?>' rel='noopener noreferrer'>crear nuevo modulo</a>
+                            else
+                            {
+                                echo "<p>Este módulo aún no tiene actividades asignadas.</p>";
+                            }
+                        ?>
+                    </div>
                 </div>
             </section>
         </div>
     </div>
 </body>
 </html>
-
